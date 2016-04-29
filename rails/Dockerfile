@@ -10,6 +10,4 @@ RUN apk update && \
   	gem install --no-document bundler && \
     bundle config build.nokogiri --use-system-libraries
 
-VOLUME ["/srv"]
-
 CMD ["/usr/bin/ruby", "--version"]

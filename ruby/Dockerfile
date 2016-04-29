@@ -4,6 +4,5 @@ RUN apk update \
 	&& gem install --no-document bundler \
 	&& mkdir /srv
 RUN rm -f /var/cache/apk/*
-VOLUME ["/srv"]
 
 CMD ["/usr/bin/ruby", "--version"]
