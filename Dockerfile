@@ -5,5 +5,5 @@ RUN apk update \
 	&& mkdir /srv
 RUN rm -f /var/cache/apk/*
 VOLUME ["/srv"]
-ENTRYPOINT /usr/bin/ruby
-CMD ["--version"]
+
+CMD ["/usr/bin/ruby", "--version"]
