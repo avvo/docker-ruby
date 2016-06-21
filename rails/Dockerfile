@@ -7,8 +7,8 @@ RUN apk update && \
     apk add ruby ruby-dev ruby-io-console ruby-json ruby-bigdecimal && \
     update-ca-certificates && \
     rm -rf /var/cache/apk/* && \
-    mkdir /srv && \
-  	gem install --no-document bundler && \
+    mkdir -p /srv && \
+    gem install --no-document bundler -v 1.12.5 && \
     bundle config build.nokogiri --use-system-libraries
 
 CMD ["/usr/bin/ruby", "--version"]
