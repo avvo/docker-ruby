@@ -4,7 +4,7 @@ MAINTAINER Jeff Ching <jching@avvo.com>
 RUN apk update && \
     apk upgrade && \
     apk add zlib-dev libxml2-dev libxslt-dev tzdata build-base linux-headers openssl-dev ca-certificates && \
-    apk add ruby ruby-dev ruby-io-console ruby-json ruby-bigdecimal && \
+    apk add ruby ruby-irb ruby-dev ruby-io-console ruby-json ruby-bigdecimal && \
     update-ca-certificates && \
     rm -rf /var/cache/apk/* && \
     mkdir -p /srv && \
