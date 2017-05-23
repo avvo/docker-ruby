@@ -1,0 +1,80 @@
+FROM ubuntu:latest
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
+
+RUN apt-get update \
+&&  apt-get upgrade -y \
+&&  apt-get install -y \
+  libssl-dev \
+  libreadline-dev \
+  language-pack-en \
+  zlib1g-dev \
+  wget \
+  curl \
+  git \
+  build-essential \
+  vim \
+  dtach \
+  imagemagick \
+  libmagick++-dev \
+  libqtwebkit-dev \
+  libffi-dev \
+  mysql-client \
+  libmysqlclient-dev \
+  libxslt1-dev \
+  redis-tools \
+  xvfb \
+  python \
+  python-software-properties \
+  hunspell \
+  libhunspell-dev \
+  aspell \
+  libaspell-dev \
+  aspell-en \
+  libcurl4-openssl-dev \
+&&  curl -sL https://deb.nodesource.com/setup_7.x | bash - \
+&&  apt-get install -y nodejs \
+&&  apt-get clean \
+&&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
+# pip install
+RUN wget https://bootstrap.pypa.io/get-pip.py \
+&&  python get-pip.py
+
+# s3cmd install
+RUN pip install s3cmd
+
+# phantomjs install
+ENV PHANTOMJS_VERSION 2.1.1
+
+RUN wget -U "wget" --wait=5 https://cnpmjs.org/mirrors/phantomjs/phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 \
+&&  tar xf phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2 \
+&&  mv     phantomjs-${PHANTOMJS_VERSION}-linux-x86_64/bin/phantomjs /usr/bin/phantomjs \
+&&  rm -rf phantomjs-${PHANTOMJS_VERSION}-linux-x86_64 \
+&&  rm     phantomjs-${PHANTOMJS_VERSION}-linux-x86_64.tar.bz2
+
+# default US english language
+ENV LANG=en_US.UTF-8
+RUN update-locale LANG=en_US.UTF-8
+
+# set timezone
+RUN echo "America/Los_Angeles" > /etc/timezone \
+&&  dpkg-reconfigure -f noninteractive tzdata
+
+# install rbenv
+RUN git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv \
+&&  git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build \
+&&  git clone git://github.com/jf/rbenv-gemset.git /usr/local/rbenv/plugins/rbenv-gemset \
+&&  /usr/local/rbenv/plugins/ruby-build/install.sh
+ENV PATH /usr/local/rbenv/bin:$PATH
+ENV RBENV_ROOT /usr/local/rbenv
+
+RUN echo 'export RBENV_ROOT=/usr/local/rbenv' >> /etc/profile.d/rbenv.sh \
+&&  echo 'export PATH=/usr/local/rbenv/bin:$PATH' >> /etc/profile.d/rbenv.sh \
+&&  echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
+
+RUN echo 'export RBENV_ROOT=/usr/local/rbenv' >> /root/.bashrc \
+&&  echo 'export PATH=/usr/local/rbenv/bin:$PATH' >> /root/.bashrc \
+&&  echo 'eval "$(rbenv init -)"' >> /root/.bashrc
+
+ENV CONFIGURE_OPTS --disable-install-doc
+ENV PATH /usr/local/rbenv/bin:/usr/local/rbenv/shims:$PATH
