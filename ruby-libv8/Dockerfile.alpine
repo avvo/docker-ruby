@@ -1,0 +1,33 @@
+FROM alpine:3.5
+ENV BUNDLER_VERSION 1.14.6
+ENV NOKOGIRI_VERSION 1.6.7.2
+ENV LIBV8_VERSION 5.3.332.38
+RUN apk update && \
+    apk add --update --no-cache bash curl tar ruby ruby-dev ruby-io-console ruby-json ruby-bigdecimal ca-certificates zlib xz libxml2 libxslt tzdata && \
+    gem install --no-document bundler -v "$BUNDLER_VERSION" && \
+    mkdir -p /srv && \
+    rm -f /var/cache/apk/*
+
+# ugh, libv8 is a mess.
+# This installs system gems with compiled libs.  Bundler MUST use
+# --system (instead of --path=) to make use of the gem.
+RUN apk add --update --no-cache --virtual .libv8-builddeps make python git findutils binutils-gold linux-headers build-base zlib-dev xz-dev libxml2-dev libxslt-dev && \
+    git clone -b "$LIBV8_VERSION" --recursive git://github.com/cowboyd/libv8 && \
+    cd ./libv8 && \
+    sed -i -e 's/Gem::Platform::RUBY/Gem::Platform.local/' libv8.gemspec && \
+    gem build --verbose libv8.gemspec && \
+    ls -al && \
+    export GYP_DEFINES="$GYP_DEFINES linux_use_bundled_binutils=0 linux_use_bundled_gold=0" && \
+    gem install --no-document --verbose libv8-${LIBV8_VERSION}*.gem && \
+    gem install --no-document --verbose mini_racer && \
+    gem install --no-document --verbose nokogiri -v "$NOKOGIRI_VERSION" -- --use-system-libraries && \
+    apk del .libv8-builddeps && \
+    cd ../ && \
+    rm -rf ./libv8 && \
+    cd /usr/lib/ruby/gems/2.3.0/gems/libv8-${LIBV8_VERSION}*/vendor/ && \
+    mv ./v8 ./v8-to-prune && \
+    mkdir -p ./v8 && \
+    mv ./v8-to-prune/out ./v8-to-prune/include ./v8/ && \
+    rm -rf ./v8-to-prune ./depot-tools
+
+CMD ["/usr/bin/ruby", "--version"]
