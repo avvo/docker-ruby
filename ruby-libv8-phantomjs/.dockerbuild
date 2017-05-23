@@ -1,0 +1,6 @@
+NAME=$(basename `dirname $0`)
+if [[ "$NAME" == "." ]]; then
+  NAME=$(basename `pwd`)
+fi
+REPO=avvo
+echo "$NAME"
