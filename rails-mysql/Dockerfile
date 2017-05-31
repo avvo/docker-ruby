@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.5
 MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
 
 RUN apk update && \
