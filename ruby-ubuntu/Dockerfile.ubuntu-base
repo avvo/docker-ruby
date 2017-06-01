@@ -27,6 +27,7 @@ RUN apt-get update \
     python-software-properties \
     python \
     redis-tools \
+    unzip \
     vim \
     wget \
     xvfb \
