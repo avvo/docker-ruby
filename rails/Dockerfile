@@ -1,10 +1,10 @@
 FROM alpine
-MAINTAINER Jeff Ching <jching@avvo.com>
+MAINTAINER Infrastructure <infrastructure@avvo.com>
 
 RUN apk update && \
     apk upgrade && \
     apk add zlib-dev libxml2-dev libxslt-dev tzdata build-base linux-headers openssl-dev ca-certificates && \
-    apk add ruby ruby-dev ruby-io-console ruby-json ruby-bigdecimal && \
+    apk add ruby=2.3.3-r0 ruby-dev=2.3.3-r0 ruby-io-console=2.3.3-r0 ruby-json=2.3.3-r0 ruby-bigdecimal=2.3.3-r0 && \
     update-ca-certificates && \
     rm -rf /var/cache/apk/* && \
     mkdir -p /srv && \
