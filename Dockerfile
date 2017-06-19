@@ -1,4 +1,4 @@
-FROM alpine
+FROM avvo/alpine
 RUN apk update \
   && apk add ruby \
   && gem install --no-document bundler \
