@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM avvo/ubuntu:latest
 MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
 
 RUN apt-get update \

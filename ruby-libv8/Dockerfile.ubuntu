@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM avvo/ubuntu:14.04
 
 # Use wget to pull down files instead of trying to be clever and use
 # a URL in an ADD statement.  The benefit is that wget adds tuneable

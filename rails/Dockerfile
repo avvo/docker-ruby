@@ -1,4 +1,4 @@
-FROM alpine
+FROM avvo/alpine
 MAINTAINER Jeff Ching <jching@avvo.com>
 
 RUN apk update && \

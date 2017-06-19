@@ -1,4 +1,4 @@
-FROM alpine
+FROM avvo/alpine
 RUN apk update && \
     apk add ruby ruby-dev ruby-io-console ruby-json ruby-bigdecimal ca-certificates && \
     gem install --no-document bundler -v 1.15.0 && \

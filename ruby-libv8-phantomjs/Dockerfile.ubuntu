@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM avvo/ubuntu:14.04
 
 # There are a few different tars of phantomjs floating around in various
 # URLs on github and other places.  Their archives are packaged in different
