@@ -4,24 +4,24 @@ MAINTAINER Greg Orlov <greg@avvo.com>
 RUN apk update && \
     apk upgrade && \
     apk add \
-      'ruby<2.4' \
-      ruby-dev \
-      ruby-libs \
-      ruby-minitest \
-      ruby-rdoc \
-      ruby-bigdecimal \
-      ruby-io-console \
-      ruby-json \
-      ruby-irb \
-      ruby-rake && \
-    apk add zlib-dev \
+      build-base \
+      ca-certificates \
       libxml2-dev \
       libxslt-dev \
-      tzdata \
-      build-base \
       linux-headers \
       openssl-dev \
-      ca-certificates && \
+      'ruby<2.4' \
+      ruby-bigdecimal \
+      ruby-dev \
+      ruby-io-console \
+      ruby-irb \
+      ruby-json \
+      ruby-libs \
+      ruby-minitest \
+      ruby-rake \
+      ruby-rdoc \
+      tzdata \
+      zlib-dev && \
     rm -rf /var/cache/apk/* && \
     update-ca-certificates && \
     mkdir -p /srv && \
