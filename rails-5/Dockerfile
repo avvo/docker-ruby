@@ -6,10 +6,10 @@ RUN apk update && \
     apk add \
       build-base \
       ca-certificates \
+      libressl-dev \
       libxml2-dev \
       libxslt-dev \
       linux-headers \
-      openssl-dev \
       'ruby<2.4' \
       ruby-bigdecimal \
       ruby-dev \
