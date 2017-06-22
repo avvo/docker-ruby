@@ -1,0 +1,20 @@
+FROM ruby:2.1-alpine
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
+
+RUN apk update && \
+    apk upgrade && \
+    apk add \
+      mariadb-dev \
+      tzdata \
+      build-base \
+      linux-headers \
+      ca-certificates \
+      'libxml2-dev>2.6.21' \
+      libxslt-dev \
+    && \
+    update-ca-certificates && \
+    mkdir -p /srv && \
+    bundle config build.nokogiri --use-system-libraries && \
+    rm -rf /var/cache/apk/*
+
+CMD ["/usr/bin/ruby", "--version"]
