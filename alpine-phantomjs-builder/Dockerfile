@@ -33,19 +33,22 @@ RUN apk add --no-cache --virtual .build-deps \
 		python \
 		ruby
 RUN mkdir -p /usr/src
-#WORKDIR /usr/src
+## Shallow checkout phantomjs
 RUN git clone --depth 1 -b $PHANTOMJS_VERSION git://github.com/ariya/phantomjs.git /usr/src/phantomjs
 WORKDIR /usr/src/phantomjs
-#RUN git checkout $PHANTOMJS_VERSION \
+RUN for i in `ls /build*.patch`; do \
+                cd /usr/src/phantomjs \
+                        && echo "Patching phantomjs with $i" \
+                        && patch -p1 -i $i || break; \
+                done
 RUN git submodule init
+## For some reason shallow checkout breaks the submodules :(
 RUN git submodule update
 RUN for i in qtbase qtwebkit; do \
 		cd /usr/src/phantomjs/src/qt/$i \
+                        && echo "Patching $i with `ls /$i*.patch`" \
 			&& patch -p1 -i /$i*.patch || break; \
 		done
-RUN patch -p1 -i /build.patch
-RUN patch -p1 -i /build-deps.patch
-RUN patch -p1 -i /build-nonstatic.patch
 
 # build phantomjs
 RUN python build.py --confirm --skip-qtwebkit --skip-qtbase
