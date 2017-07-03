@@ -1,0 +1,10 @@
+FROM avvo/ruby-ubuntu-base:latest
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
+
+ENV RUBY_VERSION 2.4.1
+
+# install ruby
+RUN eval "$(rbenv init -)"; rbenv install ${RUBY_VERSION} \
+  && eval "$(rbenv init -)"; rbenv global ${RUBY_VERSION} \
+  && eval "$(rbenv init -)"; gem update --system \
+  && eval "$(rbenv init -)"; gem install bundler

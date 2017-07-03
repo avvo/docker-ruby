@@ -1,0 +1,19 @@
+diff -ur a/build.py b/build.py
+--- a/build.py	2017-05-17 16:58:11.318826711 -0700
++++ b/build.py	2017-05-17 16:59:03.838564199 -0700
+@@ -251,10 +251,10 @@
+             # we use an in-source build for now and never want to install
+             "-prefix", os.path.abspath("src/qt/qtbase"),
+             # use the bundled libraries, vs. system-installed ones
+-            "-qt-zlib",
+-            "-qt-libpng",
+-            "-qt-libjpeg",
+-            "-qt-pcre",
++            #"-qt-zlib",
++            #"-qt-libpng",
++            #"-qt-libjpeg",
++            #"-qt-pcre",
+             # disable unnecessary Qt features
+             "-nomake", "examples",
+             "-nomake", "tools",
+

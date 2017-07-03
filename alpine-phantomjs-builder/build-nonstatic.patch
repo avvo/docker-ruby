@@ -1,0 +1,77 @@
+diff -ur a/build.py b/build.py
+--- a/build.py	2017-05-17 16:58:11.318826711 -0700
++++ b/build.py	2017-05-19 14:33:14.633445237 -0700
+@@ -163,7 +163,7 @@
+         if platform.system() == "Windows":
+             platformOptions = [
+                 "-mp",
+-                "-static-runtime",
++                #"-static-runtime",
+                 "-no-cetest",
+                 "-no-angle",
+                 "-icu",
+@@ -245,7 +245,7 @@
+             configureExe += ".bat"
+ 
+         configure = [configureExe,
+-            "-static",
++            #"-static",
+             "-opensource",
+             "-confirm-license",
+             # we use an in-source build for now and never want to install
+@@ -289,26 +289,22 @@
+ 
+     # build Qt Base
+     def buildQtBase(self):
+-        if self.options.skip_qtbase:
+-            print("Skipping build of Qt Base")
+-            return
+-
+         if self.options.git_clean_qtbase:
+             self.gitClean("src/qt/qtbase")
+ 
+         if self.options.git_clean_qtbase or not self.options.skip_configure_qtbase:
+             self.configureQtBase()
+ 
++        if self.options.skip_qtbase:
++            print("Skipping build of Qt Base")
++            return
++
+         print("building Qt Base, please wait...")
+         if self.make("src/qt/qtbase") != 0:
+             raise RuntimeError("Building Qt Base failed.")
+ 
+     # build Qt WebKit
+     def buildQtWebKit(self):
+-        if self.options.skip_qtwebkit:
+-            print("Skipping build of Qt WebKit")
+-            return
+-
+         if self.options.git_clean_qtwebkit:
+             self.gitClean("src/qt/qtwebkit")
+ 
+@@ -327,6 +323,11 @@
+         ]
+         if self.options.webkit_qmake_args:
+             configureOptions.extend(self.options.webkit_qmake_args)
++
++        if self.options.skip_qtwebkit:
++            print("Skipping build of Qt WebKit")
++            return
++
+         if self.qmake("src/qt/qtwebkit", configureOptions) != 0:
+             raise RuntimeError("Configuration of Qt WebKit failed.")
+ 
+@@ -336,9 +337,9 @@
+ 
+     # build PhantomJS
+     def buildPhantomJS(self):
+-        print("Configuring PhantomJS, please wait...")
+-        if self.qmake(".", self.options.phantomjs_qmake_args) != 0:
+-            raise RuntimeError("Configuration of PhantomJS failed.")
++        #print("Configuring PhantomJS, please wait...")
++        #if self.qmake(".", self.options.phantomjs_qmake_args) != 0:
++        #    raise RuntimeError("Configuration of PhantomJS failed.")
+         print("Building PhantomJS, please wait...")
+         if self.make(".") != 0:
+             raise RuntimeError("Building PhantomJS failed.")
