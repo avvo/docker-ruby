@@ -1,5 +1,5 @@
-FROM avvo/alpine:3.5
-MAINTAINER Greg Orlov <greg@avvo.com>
+FROM avvo/alpine:latest
+MAINTAINER Avvo Infrastructure <infrastructure@avvo.com>
 
 RUN apk update && \
     apk upgrade && \
@@ -10,7 +10,7 @@ RUN apk update && \
       libxml2-dev \
       libxslt-dev \
       linux-headers \
-      'ruby<2.4' \
+      ruby \
       ruby-bigdecimal \
       ruby-dev \
       ruby-io-console \
@@ -21,11 +21,11 @@ RUN apk update && \
       ruby-rake \
       ruby-rdoc \
       tzdata \
-      zlib-dev && \
-    rm -rf /var/cache/apk/* && \
+      zlib-dev
+RUN rm -rf /var/cache/apk/* && \
     update-ca-certificates && \
     mkdir -p /srv && \
-    gem install --no-document bundler -v 1.15.1 && \
+    gem install --no-document bundler && \
     bundle config build.nokogiri --use-system-libraries
 
 CMD ["/usr/bin/ruby", "--version"]
