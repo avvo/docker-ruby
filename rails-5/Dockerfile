@@ -21,8 +21,8 @@ RUN apk update && \
       ruby-rake \
       ruby-rdoc \
       tzdata \
-      zlib-dev && \
-    rm -rf /var/cache/apk/* && \
+      zlib-dev
+RUN rm -rf /var/cache/apk/* && \
     update-ca-certificates && \
     mkdir -p /srv && \
     gem install --no-document bundler -v 1.15.1 && \
