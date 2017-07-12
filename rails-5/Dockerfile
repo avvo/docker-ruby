@@ -1,5 +1,5 @@
 FROM avvo/alpine:3.5
-MAINTAINER Greg Orlov <greg@avvo.com>
+MAINTAINER Avvo Infrastructure <infrastructure@avvo.com>
 
 RUN apk update && \
     apk upgrade && \
