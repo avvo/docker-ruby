@@ -6,6 +6,7 @@ RUN apk update && \
     apk add \
       build-base \
       ca-certificates \
+      libffi-dev \
       libressl-dev \
       libxml2-dev \
       libxslt-dev \
