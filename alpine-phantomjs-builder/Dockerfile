@@ -1,4 +1,5 @@
 FROM alpine:3.5
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
 
 ENV PHANTOMJS_VERSION 2.1.1
 COPY *.patch /

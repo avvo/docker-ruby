@@ -1,4 +1,6 @@
 FROM avvo/alpine:3.5
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
+
 ENV BUNDLER_VERSION 1.14.6
 ENV NOKOGIRI_VERSION 1.6.7.2
 ENV LIBV8_VERSION 5.3.332.38

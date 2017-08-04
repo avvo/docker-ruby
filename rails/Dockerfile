@@ -1,5 +1,5 @@
 FROM avvo/alpine
-MAINTAINER Jeff Ching <jching@avvo.com>
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
 
 RUN apk update && \
     apk upgrade && \

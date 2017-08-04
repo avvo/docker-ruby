@@ -1,4 +1,5 @@
 FROM avvo/ubuntu:14.04
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
 
 # Use wget to pull down files instead of trying to be clever and use
 # a URL in an ADD statement.  The benefit is that wget adds tuneable

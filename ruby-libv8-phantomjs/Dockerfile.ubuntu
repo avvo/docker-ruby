@@ -1,4 +1,5 @@
 FROM avvo/ubuntu:14.04
+MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
 
 # There are a few different tars of phantomjs floating around in various
 # URLs on github and other places.  Their archives are packaged in different
