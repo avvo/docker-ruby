@@ -1,5 +1,6 @@
-FROM avvo/alpine:3.5
+FROM avvo/alpine:3.6
 MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
+RUN /build/ruby 2.3.3
 
 RUN apk update && \
     apk upgrade && \
