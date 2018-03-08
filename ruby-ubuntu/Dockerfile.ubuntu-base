@@ -4,8 +4,8 @@ MAINTAINER Avvo Infrastructure Team <infrastructure@avvo.com>
 RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y \
-    aspell-en \
     aspell \
+    aspell-en \
     build-essential \
     curl \
     dtach \
@@ -24,9 +24,10 @@ RUN apt-get update \
     libssl-dev \
     libxslt1-dev \
     mysql-client \
-    python-software-properties \
     python \
+    python-software-properties \
     redis-tools \
+    tzdata \
     unzip \
     vim \
     wget \
