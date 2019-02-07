@@ -27,7 +27,7 @@ An alpine image with ruby included.  Also includes the openssl-dev system
 package for compiling gems/software that uses SSL.
 
 ### rails-mysql
-Same as rails, but includes mariadb-dev instead of openssl-dev
+Same as rails, but includes mariadb-dev instead of openssl-dev.
 
 ### rails-mysql-ci
 Uses rails-mysql as the base, and includes aspell, libffi, git client, 
